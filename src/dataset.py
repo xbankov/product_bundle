@@ -1,8 +1,7 @@
 import logging
-import pandas as pd
-
 from pathlib import Path
 
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
@@ -39,6 +38,14 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
 
     logging.debug("Resolving cancellations")
     df = resolve_cancellations(df)
+
+    logging.debug("Removing special ItemID codes:")
+    list_special_codes = df[df["ItemID"].str.contains("^[a-zA-Z]+", regex=True)][
+        "ItemID"
+    ].unique()
+
+    logging.debug(f"{list_special_codes}")
+    df = df[~df["ItemID"].isin(list_special_codes)]
 
     return df
 

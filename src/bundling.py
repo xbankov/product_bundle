@@ -1,19 +1,25 @@
 import logging
 from typing import FrozenSet, List
 import pandas as pd
-import pickle
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
+import tokenizers
+from transformers import DistilBertTokenizer, DistilBertModel
+import torch
+
+# Load the DistilBERT tokenizer and model
+tokenizer = DistilBertTokenizer.from_pretrained("distilbert-base-uncased")
+model = DistilBertModel.from_pretrained("distilbert-base-uncased")
 
 
 def rule_based_product_bundle(
-    df,
-    min_support=0.01,
-    min_threshold=1.0,
-    metric="lift",
-    min_confidence=0.5,
-    min_bundle_size=1,
-):
+    df: pd.DataFrame,
+    min_support: float = 0.01,
+    min_threshold: float = 1.0,
+    metric: str = "lift",
+    min_confidence: float = 0.5,
+    min_bundle_size: int = 1,
+) -> List[FrozenSet]:
     logging.debug(
         "Create a pivot table for market basket analysis using InvoiceNo and ItemID"
     )
@@ -59,3 +65,10 @@ def rule_based_product_bundle(
             generated_bundles.add(frozenset(bundle))
     logging.debug(f"Generated {len(generated_bundles)} bundles using association rules")
     return common_bundles | generated_bundles
+
+
+def encode_text(text, tokenizer, model):
+    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+    with torch.no_grad():
+        outputs = model(**inputs)
+    return outputs.last_hidden_state.mean(dim=1).squeeze().numpy()

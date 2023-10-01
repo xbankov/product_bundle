@@ -1,11 +1,13 @@
 import logging
 from pathlib import Path
 from tqdm import tqdm
+
 # import wandb
 from sklearn.model_selection import ParameterGrid
 from dataset import read_dataset, split
 from evaluation import evaluate_bundles
-from bundling import rule_based_product_bundle, save_best_bundles
+from bundling import rule_based_product_bundle
+from utils import save_best_bundles
 
 
 def main():
@@ -23,11 +25,11 @@ def main():
     logging.info("Grid-search over rule-based apriori hyper-parameters")
     # Define the hyperparameter grid for grid search
     param_grid = {
-        "min_support": [0.01, 0.02, 0.03, 0.05],
-        "min_confidence": [0.5, 0.75, 0.9],
+        "min_support": [0.02],
+        "min_confidence": [0.75],
         "min_bundle_size": [1],
-        "metric": ["lift", "confidence", "zhangs_metric"],
-        "min_threshold": [0.5, 0.75, 0.8, 0.9, 1.0],
+        "metric": ["confidence"],
+        "min_threshold": [0.75],
     }
     # Initialize Weights and Biases (wandb)
     # wandb.init(project="product-bundle-hyperparameter-search")
@@ -47,7 +49,7 @@ def main():
     # Iterate through the hyperparameter grid
     for params in tqdm(ParameterGrid(param_grid)):
         # wandb.config.update(
-            # params, allow_val_change=True
+        # params, allow_val_change=True
         # )  # Log hyperparameters to wandb
 
         # Run the rule-based product bundling with the current hyperparameters

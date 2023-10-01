@@ -1,10 +1,7 @@
-from pathlib import Path
 import pickle
 from typing import FrozenSet, List
 
 import pandas as pd
-
-from src.dataset import read_dataset
 
 
 def save_best_bundles(bundles: List[FrozenSet]) -> None:
@@ -25,9 +22,9 @@ def load_pricing_data() -> pd.DataFrame:
     return pd.read_csv("static/pricing.csv")
 
 
-def generate_pricing_data():
-    data_dir = Path("data/data.csv")
-    dataset = read_dataset(data_dir, force=False).loc[
-        :, ["ItemID", "UnitPrice", "InvoiceDate"]
-    ]
-    save_pricing_data(dataset)
+def save_similarity_matrix(df: pd.DataFrame):
+    return df.to_csv("static/item_similarity.csv", index=False)
+
+
+def load_similarity_matrix() -> pd.DataFrame:
+    return pd.read_csv("static/item_similarity.csv")
