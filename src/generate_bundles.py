@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 from tqdm import tqdm
-import wandb
+# import wandb
 from sklearn.model_selection import ParameterGrid
 from dataset import read_dataset, split
 from evaluation import evaluate_bundles
@@ -10,15 +10,15 @@ from bundling import rule_based_product_bundle, save_best_bundles
 
 def main():
     logging.basicConfig(
-        level=logging.DEBUG,  # Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+        level=logging.INFO,  # Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
-
+    data_dir = Path("data/data.csv")
     logging.info("Load and preprocess dataset (load preprocessed file if possible)")
-    dataset = read_dataset(Path("data/data.csv"), force=False)
+    dataset = read_dataset(data_dir, force=False)
 
     logging.info("Split Dataset (load splits files if possible)")
-    train_df, valid_df, test_df = split(dataset, "InvoiceNo", force=False)
+    train_df, valid_df, test_df = split(dataset, data_dir, "InvoiceNo", force=False)
 
     logging.info("Grid-search over rule-based apriori hyper-parameters")
     # Define the hyperparameter grid for grid search
@@ -30,7 +30,7 @@ def main():
         "min_threshold": [0.5, 0.75, 0.8, 0.9, 1.0],
     }
     # Initialize Weights and Biases (wandb)
-    wandb.init(project="product-bundle-hyperparameter-search")
+    # wandb.init(project="product-bundle-hyperparameter-search")
 
     # Create a dictionary to store the best hyperparameters and evaluation scores
     best_params = {
@@ -46,9 +46,9 @@ def main():
 
     # Iterate through the hyperparameter grid
     for params in tqdm(ParameterGrid(param_grid)):
-        wandb.config.update(
-            params, allow_val_change=True
-        )  # Log hyperparameters to wandb
+        # wandb.config.update(
+            # params, allow_val_change=True
+        # )  # Log hyperparameters to wandb
 
         # Run the rule-based product bundling with the current hyperparameters
         bundles = rule_based_product_bundle(
@@ -67,7 +67,7 @@ def main():
             precision, recall, f1 = 0, 0, 0
 
         # Log evaluation metrics to wandb
-        wandb.log({"precision": precision, "recall": recall, "f1": f1})
+        # wandb.log({"precision": precision, "recall": recall, "f1": f1})
 
         # Check if the current hyperparameters outperform the best ones found so far
         if f1 > best_params["f1"]:

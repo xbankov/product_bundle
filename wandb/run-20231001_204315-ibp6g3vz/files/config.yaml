@@ -8,7 +8,7 @@ _wandb:
     framework: sklearn
     is_jupyter_run: false
     is_kaggle_kernel: false
-    start_time: 1696180419.283954
+    start_time: 1696185795.625479
     t:
       1:
       - 5
@@ -27,16 +27,16 @@ _wandb:
       13: linux-x86_64
 metric:
   desc: null
-  value: lift
+  value: zhangs_metric
 min_bundle_size:
   desc: null
   value: 1
 min_confidence:
   desc: null
-  value: 0.5
+  value: 0.9
 min_support:
   desc: null
-  value: 0.01
+  value: 0.05
 min_threshold:
   desc: null
-  value: 0.5
+  value: 1.0

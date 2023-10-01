@@ -6,7 +6,7 @@ from pathlib import Path
 from sklearn.model_selection import train_test_split
 
 
-def read_dataset(path: Path, force=False) -> pd.DataFrame:
+def read_dataset(path: Path, force: bool = False) -> pd.DataFrame:
     cleaned_path = path.parent / "data_cleaned.csv"
     if cleaned_path.exists() and not force:
         logging.debug(f"Loading preprocessed csv from {cleaned_path}")
@@ -16,7 +16,7 @@ def read_dataset(path: Path, force=False) -> pd.DataFrame:
         f"Cannot find preprocessed csv from {cleaned_path}. Preprocessing ..."
     )
     df_initial = pd.read_csv(
-        "data/data.csv",
+        path,
         encoding="ISO-8859-1",
         dtype={"CustomerID": str, "InvoiceID": str},
         parse_dates=["InvoiceDate"],
@@ -66,7 +66,7 @@ def resolve_cancellations(df: pd.DataFrame) -> pd.DataFrame:
 
     logging.debug("Substract cancellations until quantity would be negative")
 
-    def resolve_cancel(df):
+    def resolve_cancel(df: pd.DataFrame) -> int:
         df = df.sort_values(by="InvoiceDate_y")
         quantity = df["Quantity_x"].iloc[0]
         for _, row in df.iterrows():
@@ -107,8 +107,10 @@ def resolve_cancellations(df: pd.DataFrame) -> pd.DataFrame:
     return df_cleaned
 
 
-def split(df, col_name="CustomerID", force=False):
-    splits_dir = Path("data/splits/")
+def split(
+    df: pd.DataFrame, data_dir: Path, col_name: str, force: bool = False
+) -> [pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    splits_dir = data_dir.parent
     train_path = splits_dir / "train.csv"
     valid_path = splits_dir / "valid.csv"
     test_path = splits_dir / "test.csv"
