@@ -1,4 +1,4 @@
-def evaluate_bundles(predicted_bundles, df, verbose=0):
+def evaluate_bundles(df, predicted_bundles, verbose=0):
     # Convert the testing DataFrame into a set of actual bundles
     setty_df = df.groupby("InvoiceNo")["ItemID"].apply(frozenset)
     actual_bundles = set(setty_df[setty_df.apply(len) > 1].to_list())

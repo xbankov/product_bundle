@@ -1,0 +1,42 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.5
+    cli_version: 0.15.11
+    framework: sklearn
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1696180799.292167
+    t:
+      1:
+      - 5
+      - 53
+      - 55
+      2:
+      - 5
+      - 53
+      - 55
+      3:
+      - 23
+      4: 3.11.5
+      5: 0.15.11
+      8:
+      - 5
+      13: linux-x86_64
+metric:
+  desc: null
+  value: lift
+min_bundle_size:
+  desc: null
+  value: 1
+min_confidence:
+  desc: null
+  value: 0.5
+min_support:
+  desc: null
+  value: 0.03
+min_threshold:
+  desc: null
+  value: 0.5

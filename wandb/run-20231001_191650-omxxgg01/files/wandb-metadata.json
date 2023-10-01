@@ -1,0 +1,80 @@
+{
+    "os": "Linux-5.15.0-60-generic-x86_64-with-glibc2.35",
+    "python": "3.11.5",
+    "heartbeatAt": "2023-10-01T17:16:50.907030",
+    "startedAt": "2023-10-01T17:16:50.227607",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/xbankov/product_bundle/src/generate_bundles.py",
+    "codePathLocal": "src/generate_bundles.py",
+    "codePath": "src/generate_bundles.py",
+    "git": {
+        "remote": "git@github.com:xbankov/product_bundle.git",
+        "commit": "e861ffb8c648591d1670450f0005da56cdc1037e"
+    },
+    "email": "mikulas.bankovic27@gmail.com",
+    "root": "/home/xbankov/product_bundle",
+    "host": "jarvis",
+    "username": "xbankov",
+    "executable": "/home/xbankov/miniconda3/envs/product_bundle/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2.1796249999999997,
+        "min": 400.0,
+        "max": 4000.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2.0,
+            "min": 400.0,
+            "max": 4000.0
+        },
+        {
+            "current": 2.0,
+            "min": 400.0,
+            "max": 4000.0
+        },
+        {
+            "current": 3.437,
+            "min": 400.0,
+            "max": 4000.0
+        },
+        {
+            "current": 2.0,
+            "min": 400.0,
+            "max": 4000.0
+        },
+        {
+            "current": 2.0,
+            "min": 400.0,
+            "max": 4000.0
+        },
+        {
+            "current": 2.0,
+            "min": 400.0,
+            "max": 4000.0
+        },
+        {
+            "current": 2.0,
+            "min": 400.0,
+            "max": 4000.0
+        },
+        {
+            "current": 2.0,
+            "min": 400.0,
+            "max": 4000.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 466.2383117675781,
+            "used": 408.45851135253906
+        }
+    },
+    "memory": {
+        "total": 15.395042419433594
+    }
+}

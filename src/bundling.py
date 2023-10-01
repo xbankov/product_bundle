@@ -1,5 +1,7 @@
 import logging
+from typing import FrozenSet, List
 import pandas as pd
+import pickle
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
 
@@ -57,3 +59,13 @@ def rule_based_product_bundle(
             generated_bundles.add(frozenset(bundle))
     logging.debug(f"Generated {len(generated_bundles)} bundles using association rules")
     return common_bundles | generated_bundles
+
+
+def save_best_bundles(bundles: List[FrozenSet]) -> None:
+    with open("static/best_bundles.pickle", "wb") as pickle_file:
+        pickle.dump(bundles, pickle_file)
+
+
+def load_best_bundles() -> List[FrozenSet]:
+    with open("static/best_bundles.pickle", "rb") as pickle_file:
+        return pickle.load(pickle_file)
