@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 80
 
 # Define the command to run the API when the container starts
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8888"]

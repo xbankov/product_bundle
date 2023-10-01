@@ -10,5 +10,7 @@ def price_item(pricing_df: pd.DataFrame, product_id: str):
     )
 
 
-def price_bundle(bundle: List[FrozenSet], discount: float = 1.0):
-    return discount * sum(price_item(product_id) for product_id in bundle)
+def price_bundle(
+    pricing_df: pd.DataFrame, bundle: List[FrozenSet], discount: float = 1.0
+):
+    return discount * sum(price_item(pricing_df, product_id) for product_id in bundle)

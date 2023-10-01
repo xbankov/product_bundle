@@ -28,7 +28,7 @@ def get_product_bundle(product_id: str):
         bundle = [product_id]
 
     # Calculate the price for the whole bundle
-    price = price_bundle(bundle)
+    price = price_bundle(pricing_dataset, bundle)
 
     # Return the list of products and the price for the bundle
     return {"product_id": product_id, "products": bundle, "price": price}

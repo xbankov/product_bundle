@@ -18,7 +18,7 @@ def load_best_bundles() -> List[FrozenSet]:
 
 
 def save_pricing_data(df: pd.DataFrame):
-    return pd.to_csv(df, "static/pricing.csv", index=False)
+    return df.to_csv("static/pricing.csv", index=False)
 
 
 def load_pricing_data() -> pd.DataFrame:
@@ -27,5 +27,7 @@ def load_pricing_data() -> pd.DataFrame:
 
 def generate_pricing_data():
     data_dir = Path("data/data.csv")
-    dataset = read_dataset(data_dir, force=False).loc[:, ["ItemID", "UnitPrice"]]
+    dataset = read_dataset(data_dir, force=False).loc[
+        :, ["ItemID", "UnitPrice", "InvoiceDate"]
+    ]
     save_pricing_data(dataset)

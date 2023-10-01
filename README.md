@@ -56,3 +56,23 @@ If I don't have access to current catalogue, I can always take the last purchase
 ### Implement a regression model for the products’ prices (UnitPrice) prediction.
 
 ### Dockerized RestAPI
+
+- Clone git repo:
+
+`git clone REPO`
+
+- Change directory
+
+`cd product_bundle`
+
+- Build a docker image:
+
+`docker build -t bundle_api .`
+
+- Run a docker image:
+
+`docker run -p 8888:8888 bundle_api`
+
+- Go to an API an look for a bundle for product 22423
+
+`http://0.0.0.0:8888/bundles/22423`
