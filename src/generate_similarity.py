@@ -2,7 +2,9 @@ import logging
 from pathlib import Path
 
 
-from dataset import read_dataset, text_and_price_preprocess
+from dataset import read_dataset
+from utils import save_similar_products
+from bundling import add_text_and_price_features, get_similar_products
 
 
 def main():
@@ -12,10 +14,12 @@ def main():
     )
     data_dir = Path("data/data.csv")
     df = read_dataset(data_dir, force=False).loc[
-        :, ["ItemID", "Description", "UnitPrice"]
+        :, ["ItemID", "Description", "UnitPrice", "InvoiceDate"]
     ]
-    df = text_and_price_preprocess(df)
-    
+    text_df = add_text_and_price_features(df)
+    similar_products = get_similar_products(text_df, num_products=3)
+    save_similar_products(similar_products)
+    logging.info("DONE")
 
 
 if __name__ == "__main__":

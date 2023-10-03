@@ -16,6 +16,7 @@ def main():
     ]
     logging.debug("Saving pricing data")
     save_pricing_data(df)
+    logging.info("DONE")
 
 
 if __name__ == "__main__":
