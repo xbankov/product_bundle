@@ -1,34 +1,36 @@
-from pathlib import Path
 from fastapi import FastAPI
-from src.pricing import price_bundle
+from pricing.pricing import price_bundle
 
-from src.utils import load_best_bundles, load_pricing_data, load_similar_products
+from src.utils import load_pricing_data, load_bundles
 
 
 app = FastAPI()
 
-
-static_bundles = load_best_bundles()
+rule_bundles, collaborative_bundles, content_bundles = load_bundles()
 pricing_dataset = load_pricing_data()
-similar_products = load_similar_products()
 
 
 @app.get("/bundles/{product_id}")
 def get_product_bundle(product_id: str):
-    # Logic to retrieve the product bundle based on the product_id
-    # Filter the frozensets that contain the productId
-    filtered_bundles = [bundle for bundle in static_bundles if product_id in bundle]
+    product_bundle_rule = [bundle for bundle in rule_bundles if product_id in bundle]
+    product_bundle_collaborative = [
+        bundle for bundle in collaborative_bundles if product_id in bundle
+    ]
+    product_bundle_content = [
+        bundle for bundle in content_bundles if product_id in bundle
+    ]
 
-    # Sort the filtered bundles by length in descending order (Ideally pick by metric)
-    sorted_bundles = sorted(filtered_bundles, key=len, reverse=True)
-
-    if sorted_bundles:
+    if len(product_bundle_rule) > 0:
+        sorted_bundles = sorted(product_bundle_rule, key=len, reverse=True)
         bundle = sorted_bundles[0]
+    elif len(product_bundle_collaborative) > 0:
+        bundle = product_bundle_collaborative[0]
+
+    elif len(product_bundle_content) > 0:
+        bundle = product_bundle_collaborative[0]
+
     else:
-        product_row = similar_products[similar_products["ItemID"] == product_id]
-        bundle = product_row.iloc[["Top Index", "Second Index", "Third Index"]][
-            "ItemID"
-        ]
+        bundle = [product_id]
 
     # Calculate the price for the whole bundle
     price = price_bundle(pricing_dataset, bundle)

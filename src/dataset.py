@@ -47,6 +47,7 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     logging.debug(f"{list_special_codes}")
     df = df[~df["ItemID"].isin(list_special_codes)]
 
+    
     return df
 
 
@@ -117,13 +118,15 @@ def resolve_cancellations(df: pd.DataFrame) -> pd.DataFrame:
 def split(
     df: pd.DataFrame, data_dir: Path, col_name: str, force: bool = False
 ) -> [pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    splits_dir = data_dir.parent
+    splits_dir = data_dir.parent / col_name
+
+    splits_dir.mkdir(exist_ok=True)
     train_path = splits_dir / "train.csv"
     valid_path = splits_dir / "valid.csv"
     test_path = splits_dir / "test.csv"
 
     valid_splits = train_path.exists() and valid_path.exists() and test_path.exists()
-    if Path(splits_dir).exists() and valid_splits and not force:
+    if valid_splits and not force:
         logging.debug(f"Splits found in: {splits_dir} and none is missing.")
         return pd.read_csv(train_path), pd.read_csv(valid_path), pd.read_csv(test_path)
 
