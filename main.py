@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pricing.pricing import price_bundle
+from pricing import price_bundle
 
 from src.utils import load_pricing_data, load_bundles
 

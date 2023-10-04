@@ -45,7 +45,7 @@ At last I decided to also make use of similarity between products using textual 
 
 - If CustomerID would be passed during inference as well, bundling could be then personalized.
 - I also had an idea to create neural network with triplet loss, training using negative and positive pairs of bundles. However I focused on demonstrating basics of recommendation systems.
-- For the same reason I did not choose other SOTA systems using neural networks, which should be also considered.
+- For the same reason I did not choose other not so established SOTA research implementations, which should be also considered.
 
 ### Splitting the dataset
 
@@ -98,9 +98,14 @@ I implemented simple neural network using encoded description using distillbert 
 
 `http://0.0.0.0:8888/bundles/22423`
 
-### Structure
+### Disclaimer
 
-- src
-  - Source code
-  - bundling_*.py - functions used during evaluation and generation
-  - evaluate_*.py - 
+- Current evaluation shows that all the technique are either wrong, or there is a bug in my evaluation, I strongly suspect the second.
+- It would be possible to formulate the task differently, where the model do not generate the whole bundle, just suggest the single item to add into a bundle. Current methods could be easily adjusted for that purpose and the evaluation as well.
+
+### Source code structure
+
+- Source code
+- bundling\_\*.py - functions used during evaluation and generation
+- evaluate\_\*.py - scripts to find hyperparameters, save the best params, evaluate metrics and save the bundles from the best
+- pricing\_\*.py - Regression model and LastPurchase "model"

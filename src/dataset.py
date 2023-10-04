@@ -14,16 +14,13 @@ def read_dataset(path: Path, force: bool = False) -> pd.DataFrame:
     logging.debug(
         f"Cannot find preprocessed csv from {cleaned_path}. Preprocessing ..."
     )
-    df_initial = pd.read_csv(
+    dataset = pd.read_csv(
         path,
         encoding="ISO-8859-1",
         dtype={"CustomerID": str, "InvoiceID": str},
         parse_dates=["InvoiceDate"],
     )
-
-    df_cleaned = preprocess(df_initial)
-    df_cleaned.to_csv(cleaned_path, index=False)
-    return pd.read_csv(cleaned_path)
+    return
 
 
 def preprocess(df: pd.DataFrame) -> pd.DataFrame:
@@ -47,7 +44,6 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     logging.debug(f"{list_special_codes}")
     df = df[~df["ItemID"].isin(list_special_codes)]
 
-    
     return df
 
 
