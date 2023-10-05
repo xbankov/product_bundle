@@ -66,10 +66,11 @@ Splitting by CustomerID would be beneficial, if I had customerID during the infe
 
 If I don't have access to current price catalogue, I can take the last purchase of the item as a baseline. It could be beneficial to put slight discount on the bundle, given that customer would buy more products from us using a bundle. However, to determine that I believe I would need actual cost/profit data, to not undersell the items.
 
-### How would you evaluate the business impact of the solution and share the outcome with the internal stakeholders?
+### How would you evaluatise the business impact of the solution and share the outcome with the internal stakeholders?
 
-- The rule-based solution even though covering small space of potential bundles is successfull 40% of times in our validation dataset. Every 2nd and a half bundle will be bought. We will ease the customers experience by using only one click. Retention rate would be higher, and that we can measure using A/B test.
-- Additionaly collaborative filtering can give inside about other customers purchased products in a bundle, for example products for a same use (guitar pick + guitar capo + guitar stand), that may not share the same textual description or price but are often bought together.
+- I would improve the metrics and evaluation. Then I would perform A/B testing.
+- The rule-based bundles are extracted with the high precision, so we aim to only have few rules, that are very frequent.
+- On top of that, collaborative filtering can give inside about other customers purchased products in a bundle, for example products for a same use (guitar pick + guitar capo + guitar stand), that may not share the same textual description or price but are often bought together.
 - And finally content-based filtering shows similar products together, therefore it servers users searching for the same type of the product in a collection, for example different colors, candle scents, etc.
 
 ### Implement a regression model for the products’ prices (UnitPrice) prediction.
@@ -117,5 +118,5 @@ To generate all files in data and in static run `prepare.sh`
 ### Notebooks
 
 - I have experimented with the code using notebooks, these are in general not currated or runnable.
-- The most interesting was gnn_experiment.ipynb, where I tried to use Graph Neural Network, unfortunately, my PC was not able to handle the calculations, therefore I stopped trying to make it work.
+- The most interesting was gnn_experiment.ipynb, where I tried to use Graph Neural Network, unfortunately, attempt was not successful as I devoted too much time to the other methods, there was little left for this novel approach.
 - In `analyse_bundles.ipynb` there is an random example of created bundles
