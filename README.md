@@ -101,6 +101,8 @@ I implemented simple neural network using encoded description using distillbert 
 
 ### Run
 
+`pip install -r requirements.txt`
+`pip install .`
 To generate all files in data and in static run `prepare.sh`
 
 ### Disclaimer
