@@ -110,13 +110,6 @@ To generate all files in data and in static run `prepare.sh`
 - Current evaluation shows that all the technique are either wrong, or there is a bug in my evaluation, I strongly suspect the second.
 - It would be possible to formulate the task differently, where the model do not generate the whole bundle, just suggest the single item to add into a bundle. Current methods could be easily adjusted for that purpose and the evaluation as well.
 
-### Source code structure
-
-- Source code
-- bundling\_\*.py - functions used during evaluation and generation
-- evaluate\_\*.py - scripts to find hyperparameters, save the best params, evaluate metrics and save the bundles from the best
-- pricing\_\*.py - Regression model and LastPurchase "model"
-
 ### Notebooks
 
 - I have experimented with the code using notebooks, these are in general not currated or runnable.
