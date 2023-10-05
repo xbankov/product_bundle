@@ -98,6 +98,10 @@ I implemented simple neural network using encoded description using distillbert 
 
 `http://0.0.0.0:8888/bundles/22423`
 
+### Run
+
+To generate all files in data and in static run `prepare.sh`
+
 ### Disclaimer
 
 - Current evaluation shows that all the technique are either wrong, or there is a bug in my evaluation, I strongly suspect the second.
@@ -109,3 +113,9 @@ I implemented simple neural network using encoded description using distillbert 
 - bundling\_\*.py - functions used during evaluation and generation
 - evaluate\_\*.py - scripts to find hyperparameters, save the best params, evaluate metrics and save the bundles from the best
 - pricing\_\*.py - Regression model and LastPurchase "model"
+
+### Notebooks
+
+- I have experimented with the code using notebooks, these are in general not currated or runnable.
+- The most interesting was gnn_experiment.ipynb, where I tried to use Graph Neural Network, unfortunately, my PC was not able to handle the calculations, therefore I stopped trying to make it work.
+- In `analyse_bundles.ipynb` there is an random example of created bundles

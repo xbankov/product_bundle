@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "/home/xbankov/miniconda3",
+        "./src",
+        "./src/product_bundle"
+    ]
+}

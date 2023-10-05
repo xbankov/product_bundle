@@ -1,8 +1,9 @@
 import logging
 from pathlib import Path
 
-from dataset import read_dataset, split
-from evaluation import evaluation_loop
+from product_bundle.dataset import read_dataset, split
+from product_bundle.evaluation import evaluation_loop
+from product_bundle.utils import load_product_df
 
 
 def main():
@@ -10,12 +11,14 @@ def main():
         level=logging.INFO,  # Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
-    data_dir = Path("data/data.csv")
+    data_dir = Path("data")
     logging.debug("Load and preprocess dataset (load preprocessed file if possible)")
-    dataset = read_dataset(data_dir, force=False)
+    dataset = read_dataset(data_dir)
 
     logging.debug("Split Dataset (load splits files if possible)")
-    train_df, valid_df, test_df = split(dataset, data_dir, "InvoiceNo", force=False)
+
+    product_df = load_product_df(data_dir)
+    _, valid_df, test_df = split(dataset, data_dir, "InvoiceNo", force=False)
 
     param_grid = {
         "bundle_size": [2, 3, 4, 5],
@@ -23,7 +26,7 @@ def main():
     }
 
     evaluation_loop(
-        train_df=train_df,
+        train_df=product_df,
         valid_df=valid_df,
         test_df=test_df,
         method="content",

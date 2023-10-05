@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from pricing import price_bundle
 
-from src.utils import load_pricing_data, load_bundles
-
+from src.utils import load_bundles, load_pricing_data
 
 app = FastAPI()
 
