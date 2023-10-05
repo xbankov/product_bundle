@@ -75,7 +75,7 @@ If I don't have access to current price catalogue, I can take the last purchase 
 
 ### Implement a regression model for the products’ prices (UnitPrice) prediction.
 
-I implemented simple neural network using encoded description using distillbert and encoded datetime fastai feature engineering to predict the price. I believe test MSE Loss of 0.4461 shows that I am in the right direction, and I decided not to improve it anymore for the ske of time. I also decide not to add it to the REST_API, as I believe that was not wanted from the FrontEnd team, but can be easily adjusted if needed.
+I implemented simple neural network using encoded description using distillbert and encoded datetime fastai feature engineering to predict the price. I decided not to improve it anymore for the sake of time. I also decide not to add it to the REST_API, as I believe that was not wanted from the FrontEnd team, but can be easily adjusted if needed.
 
 ### Dockerized RestAPI RUN
 
